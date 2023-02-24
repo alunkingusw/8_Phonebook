@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PhonebookView: View {
     @State var showView = false
-    @StateObject var data = Contacts()
+    @StateObject private var data = Contacts()
     var body: some View {
         NavigationView{
             List (data.contacts){ contact in
@@ -24,11 +24,15 @@ struct PhonebookView: View {
                 Button("+"){
                     showView.toggle()
                 }.sheet(isPresented:$showView){
-                    ContactDetailView(contact:Contact(name:"Example", number:"Example"))
+                    ContactAddView(contactList:data)
                 }
             }
+            
         }
     }
+    
+  
+
 }
 
 struct PhonebookView_Previews: PreviewProvider {

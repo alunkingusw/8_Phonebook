@@ -7,8 +7,8 @@
 
 import Foundation
 class Contact:Identifiable, ObservableObject{
-    var name:String
-    var number:String
+    @Published var name:String
+    @Published var number:String
     let id = UUID()
     
     init (name:String, number:String){

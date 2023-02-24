@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContactRowView: View {
-    var contact:Contact
+    @StateObject var contact:Contact
 
     var body: some View {
         VStack{
