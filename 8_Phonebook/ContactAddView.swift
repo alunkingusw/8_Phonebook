@@ -12,10 +12,11 @@ struct ContactAddView: View {
     
     @StateObject var newContact = Contact(name:"", number:"")
     
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack{
+            
             HStack {
                 Button(action: {
                     dismiss()
@@ -25,6 +26,7 @@ struct ContactAddView: View {
                 Spacer()
                 
                 Button(action: {
+                    ///do some validation here
                     contactList.contacts.append(newContact)
                     dismiss()
                 }) {
@@ -32,7 +34,8 @@ struct ContactAddView: View {
                 }
                 .padding()
                 
-            } //HStack
+            } //End HStack
+            
             TextField("Name: ", text: $newContact.name)
             TextField("Number: ", text: $newContact.number)
         }.padding(2.0)
