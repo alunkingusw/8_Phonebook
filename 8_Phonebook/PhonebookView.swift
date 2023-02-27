@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PhonebookView: View {
     @State var showView = false
-    @StateObject private var data = Contacts()
+    @ObservedObject var data:Contacts
+    @Environment(\.scenePhase) private var scenePhase
+    let saveAction: ()->Void
     var body: some View {
         NavigationView{
             List (data.contacts){ contact in
@@ -29,14 +31,17 @@ struct PhonebookView: View {
             }
             
         }
-    }
     
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive { saveAction() }
+        }
+    }
   
 
 }
 
 struct PhonebookView_Previews: PreviewProvider {
     static var previews: some View {
-        PhonebookView()
+        PhonebookView(data:Contacts(), saveAction: {})
     }
 }

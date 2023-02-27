@@ -22,6 +22,7 @@ struct ContactAddView: View {
                     dismiss()
                 }) {
                     Text("Cancel")
+                        .padding(6.0)
                 }
                 Spacer()
                 
@@ -31,13 +32,15 @@ struct ContactAddView: View {
                     dismiss()
                 }) {
                     Text("Save")
+                        .padding(6.0)
                 }
-                .padding()
+                
                 
             } //End HStack
-            
+            Spacer()
             TextField("Name: ", text: $newContact.name)
             TextField("Number: ", text: $newContact.number)
+            Spacer()
         }.padding(2.0)
         
     }

@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct __PhonebookApp: App {
+    @StateObject private var data = Contacts()
     var body: some Scene {
         WindowGroup {
-            PhonebookView()
+            PhonebookView(data:self.data){
+                Contacts.save(contacts: data.contacts) { result in
+                    print("Saved")
+                    if case .failure(let error) = result {
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            }
         }
     }
 }
