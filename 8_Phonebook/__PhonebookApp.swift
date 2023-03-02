@@ -19,6 +19,15 @@ struct __PhonebookApp: App {
                         fatalError(error.localizedDescription)
                     }
                 }
+            }.onAppear{
+                Contacts.load{ result in
+                    switch result{
+                    case .failure(let error):
+                        fatalError(error.localizedDescription)
+                    case .success(let contacts):
+                        data.contacts = contacts
+                    }
+                }
             }
         }
     }
