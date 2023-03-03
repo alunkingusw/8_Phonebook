@@ -14,7 +14,6 @@ struct __PhonebookApp: App {
         WindowGroup {
             PhonebookView(data:self.data){
                 Contacts.save(contacts: data.contacts) { result in
-                    print("Saved")
                     if case .failure(let error) = result {
                         fatalError(error.localizedDescription)
                     }

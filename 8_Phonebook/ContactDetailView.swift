@@ -9,12 +9,26 @@ import SwiftUI
 
 struct ContactDetailView: View {
     @StateObject var contact:Contact
+    @State var name:String
+    @State var number:String
+    
+    init(contact: Contact) {
+        _contact = StateObject(wrappedValue: contact)
+        _name = State(initialValue: contact.name)
+        _number = State(initialValue: contact.number)
+    }
+    
 
     var body: some View {
         VStack{
-            TextField("Name: \(contact.name)", text: $contact.name)
-            TextField("Number: \(contact.number)", text: $contact.number)
+            TextField("Name", text: $name)
+            TextField("Number", text: $number)
         }.padding(2.0)
+        .navigationBarItems(trailing:Button("Save"){
+            contact.name = name
+            contact.number = number
+            //clear cache and dispose view?
+        })
     }
 }
 

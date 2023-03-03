@@ -42,19 +42,19 @@ class Contacts:ObservableObject{
     }
     
     static func save(contacts: [Contact], completion: @escaping (Result<Int, Error>)->Void) {
-            DispatchQueue.global(qos: .background).async {
-                do {
-                    let data = try JSONEncoder().encode(contacts)
-                    let outfile = try fileURL()
-                    try data.write(to: outfile)
-                    DispatchQueue.main.async {
-                        completion(.success(contacts.count))
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(.failure(error))
-                    }
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let data = try JSONEncoder().encode(contacts)
+                let outfile = try fileURL()
+                try data.write(to: outfile)
+                DispatchQueue.main.async {
+                    completion(.success(contacts.count))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
                 }
             }
         }
+    }
 }

@@ -36,8 +36,6 @@ struct PhonebookView: View {
             if phase == .inactive { saveAction() }
         }
     }
-  
-
 }
 
 struct PhonebookView_Previews: PreviewProvider {
