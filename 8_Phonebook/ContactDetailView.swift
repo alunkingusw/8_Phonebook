@@ -6,12 +6,9 @@
 //
 
 import SwiftUI
-private var saving=false
 
 struct ContactDetailView: View {
     @StateObject var contact:Contact
-    @Binding var name:String
-    @Binding var number:String
     @Environment(\.dismiss) private var dismiss
     
     
@@ -20,24 +17,18 @@ struct ContactDetailView: View {
 
     var body: some View {
         VStack{
-            TextField("Name", text: $name)
-            TextField("Number", text: $number)
+            TextField("Name", text: $contact.editName)
+            TextField("Number", text: $contact.editNumber)
         }.padding(2.0)
         .navigationBarItems(trailing:Button("Save"){
-            saving=true
-            contact.name = name
-            contact.number = number
-            //clear cache and dispose view?
+            contact.name = contact.editName
+            contact.number = contact.editNumber
+            //clear cache and dispose view
             dismiss()
         })
         .onDisappear(perform:{
-            if (!saving){
-                name = contact.name
-                number = contact.number
-            }
-        })
-        .onAppear(perform:{
-            saving = false
+                contact.editName = contact.name
+                contact.editNumber = contact.number
         })
     }
 }
