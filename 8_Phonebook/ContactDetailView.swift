@@ -6,17 +6,16 @@
 //
 
 import SwiftUI
+private var saving=false
 
 struct ContactDetailView: View {
     @StateObject var contact:Contact
-    @State var name:String
-    @State var number:String
+    @Binding var name:String
+    @Binding var number:String
+    @Environment(\.dismiss) private var dismiss
     
-    init(contact: Contact) {
-        _contact = StateObject(wrappedValue: contact)
-        _name = State(initialValue: contact.name)
-        _number = State(initialValue: contact.number)
-    }
+    
+    
     
 
     var body: some View {
@@ -25,15 +24,21 @@ struct ContactDetailView: View {
             TextField("Number", text: $number)
         }.padding(2.0)
         .navigationBarItems(trailing:Button("Save"){
+            saving=true
             contact.name = name
             contact.number = number
             //clear cache and dispose view?
+            dismiss()
+        })
+        .onDisappear(perform:{
+            if (!saving){
+                name = contact.name
+                number = contact.number
+            }
+        })
+        .onAppear(perform:{
+            saving = false
         })
     }
 }
 
-struct ContactDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContactDetailView(contact:Contact(name:"Example", number:"Example"))
-    }
-}

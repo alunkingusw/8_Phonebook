@@ -10,11 +10,15 @@ class Contact:Identifiable, ObservableObject, Codable{
        
     @Published var name:String
     @Published var number:String
+    var editName:String
+    var editNumber:String
     let id = UUID()
     
     init (name:String, number:String){
         self.name = name
         self.number = number
+        self.editName = name
+        self.editNumber = number
     }
     
     //coding compliance code below
@@ -32,8 +36,11 @@ class Contact:Identifiable, ObservableObject, Codable{
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        name = try container.decode(String.self, forKey: .name)
-        number = try container.decode(String.self, forKey: .number)
+        let decodedName = try container.decode(String.self, forKey: .name)
+        let decodedNumber = try container.decode(String.self, forKey: .number)
+        name = decodedName
+        number = decodedNumber
+        editName = decodedName
+        editNumber = decodedNumber
     }
 }

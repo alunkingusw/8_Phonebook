@@ -16,7 +16,7 @@ struct PhonebookView: View {
         NavigationView{
             List (data.contacts){ contact in
                 NavigationLink{
-                    ContactDetailView(contact:contact)
+                    ContactDetailView(contact:contact, name:Binding(get:{contact.editName},set:{contact.editName = $0}), number:Binding(get:{contact.editNumber}, set:{contact.editNumber=$0}))
                 } label:{ContactRowView(contact:contact)
                 }
             }
