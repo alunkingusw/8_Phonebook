@@ -17,9 +17,11 @@ struct ContactDetailView: View {
 
     var body: some View {
         VStack{
+            //note the bindings apply to the edit field here, not the original name and number
             TextField("Name", text: $contact.editName)
             TextField("Number", text: $contact.editNumber)
         }.padding(2.0)
+        //save button simply copies the edited fields to the original record
         .navigationBarItems(trailing:Button("Save"){
             contact.name = contact.editName
             contact.number = contact.editNumber
@@ -27,8 +29,9 @@ struct ContactDetailView: View {
             dismiss()
         })
         .onDisappear(perform:{
-                contact.editName = contact.name
-                contact.editNumber = contact.number
+            //copy the originals back - if they clicked save, this code is meaningless anyway.
+            contact.editName = contact.name
+            contact.editNumber = contact.number
         })
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 class Contact:Identifiable, ObservableObject, Codable{
        
+    //the editX fields are used when we are editing to keep track of edits before we save, so we can discard if needed.
     @Published var name:String
     @Published var number:String
     var editName:String
@@ -27,6 +28,7 @@ class Contact:Identifiable, ObservableObject, Codable{
         case name, number, id
     }
     
+    //note we are not saving the edit fields as they are not needed.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
@@ -34,6 +36,7 @@ class Contact:Identifiable, ObservableObject, Codable{
         try container.encode(number, forKey: .number)
     }
     
+    //duplicate the edit field when loading so we are set up for editing correctly.
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let decodedName = try container.decode(String.self, forKey: .name)

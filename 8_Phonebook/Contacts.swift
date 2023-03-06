@@ -12,6 +12,7 @@ class Contacts:ObservableObject{
     ]
     
     private static func fileURL() throws -> URL {
+        // get the filepath for the data store.
         try FileManager.default.url(for: .documentDirectory,
                                            in: .userDomainMask,
                                            appropriateFor: nil,
@@ -41,6 +42,7 @@ class Contacts:ObservableObject{
         }
     }
     
+    //save function. Dispatches it as a background process.
     static func save(contacts: [Contact], completion: @escaping (Result<Int, Error>)->Void) {
         DispatchQueue.global(qos: .background).async {
             do {

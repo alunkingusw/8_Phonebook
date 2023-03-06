@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct PhonebookView: View {
+    //boolean to manage the newDetails view
     @State var showView = false
     @ObservedObject var data:Contacts
+    //this variable is used to listen for when the app becomes inactive
     @Environment(\.scenePhase) private var scenePhase
     let saveAction: ()->Void
     var body: some View {
         NavigationView{
+            //loop through all contacts and add them to the list
             List (data.contacts){ contact in
                 NavigationLink{
                     ContactDetailView(contact:contact)
@@ -31,7 +34,7 @@ struct PhonebookView: View {
             }
             
         }
-    
+        //this triggers a save when the app becomes inactive
         .onChange(of: scenePhase) { phase in
             if phase == .inactive { saveAction() }
         }
