@@ -9,8 +9,15 @@ import SwiftUI
 
 struct ContactAddView: View {
     @ObservedObject var contactList:Contacts
-    
+    @State private var showingImagePicker = false
+    @State var image:Image?
+    @State private var inputImage: UIImage?
     @StateObject var newContact = Contact(name:"", number:"")
+    
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
+    }
     
     @Environment(\.dismiss) private var dismiss
     
@@ -27,7 +34,12 @@ struct ContactAddView: View {
                 Spacer()
                 
                 Button(action: {
-                    ///do some validation here
+                    //do some validation here
+                    //
+                    //Save the image to the contact
+                    newContact.image = self.image
+                    newContact.editName = newContact.name
+                    newContact.editNumber = newContact.number
                     contactList.contacts.append(newContact)
                     dismiss()
                 }) {
@@ -38,11 +50,28 @@ struct ContactAddView: View {
                 
             } //End HStack
             Spacer()
+            ZStack {
+                        Rectangle()
+                            .fill(.secondary)
+
+                        Text("Tap to select a picture")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                        image?
+                            .resizable()
+                            .scaledToFit()
+                    }
+                    .onTapGesture {
+                        showingImagePicker = true
+                    }
             TextField("Name: ", text: $newContact.name)
             TextField("Number: ", text: $newContact.number)
             Spacer()
         }.padding(2.0)
-        
+            .onChange(of: inputImage) { _ in loadImage() }
+            .sheet(isPresented: $showingImagePicker) {
+                ImagePicker(image: $inputImage)
+            }
     }
 }
 

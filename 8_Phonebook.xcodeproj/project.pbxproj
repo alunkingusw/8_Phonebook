@@ -16,6 +16,7 @@
 		749A974729A8BADF003FABE6 /* ContactRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749A974629A8BADF003FABE6 /* ContactRowView.swift */; };
 		749A974929A8BAEB003FABE6 /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749A974829A8BAEB003FABE6 /* ContactDetailView.swift */; };
 		749A974B29A8C835003FABE6 /* ContactAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749A974A29A8C835003FABE6 /* ContactAddView.swift */; };
+		B115AE7E29B645EE00444F24 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B115AE7D29B645EE00444F24 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		749A974629A8BADF003FABE6 /* ContactRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRowView.swift; sourceTree = "<group>"; };
 		749A974829A8BAEB003FABE6 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
 		749A974A29A8C835003FABE6 /* ContactAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAddView.swift; sourceTree = "<group>"; };
+		B115AE7D29B645EE00444F24 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				749A973429A8BAA3003FABE6 /* __PhonebookApp.swift */,
 				749A973629A8BAA3003FABE6 /* PhonebookView.swift */,
 				749A974A29A8C835003FABE6 /* ContactAddView.swift */,
+				B115AE7D29B645EE00444F24 /* ImagePicker.swift */,
 				749A974229A8BAC2003FABE6 /* Contacts.swift */,
 				749A974429A8BACD003FABE6 /* Contact.swift */,
 				749A974629A8BADF003FABE6 /* ContactRowView.swift */,
@@ -157,6 +160,7 @@
 				749A973729A8BAA3003FABE6 /* PhonebookView.swift in Sources */,
 				749A973529A8BAA3003FABE6 /* __PhonebookApp.swift in Sources */,
 				749A974329A8BAC2003FABE6 /* Contacts.swift in Sources */,
+				B115AE7E29B645EE00444F24 /* ImagePicker.swift in Sources */,
 				749A974B29A8C835003FABE6 /* ContactAddView.swift in Sources */,
 				749A974729A8BADF003FABE6 /* ContactRowView.swift in Sources */,
 			);
