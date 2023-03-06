@@ -8,17 +8,22 @@
 import SwiftUI
 
 struct ContactAddView: View {
+    //We import this from the main view so it is an @ObservedObject
     @ObservedObject var contactList:Contacts
     
+    //Create a bank contact for the new contact page should it be called up
     @StateObject var newContact = Contact(name:"", number:"")
     
+    //this environment variable is used to dismiss the new contact page
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack{
             
             HStack {
+                //these buttons aare positioned at the top for save and cancel
                 Button(action: {
+                    //simply dismiss the view
                     dismiss()
                 }) {
                     Text("Cancel")
@@ -27,7 +32,10 @@ struct ContactAddView: View {
                 Spacer()
                 
                 Button(action: {
-                    ///do some validation here
+                    //add contact then dismiss the view
+                    //do some validation here if needed
+                    newContact.editName = newContact.name
+                    newContact.editNumber = newContact.number
                     contactList.contacts.append(newContact)
                     dismiss()
                 }) {
