@@ -11,15 +11,24 @@ struct ContactRowView: View {
     @StateObject var contact:Contact
 
     var body: some View {
-        VStack{
-            Text("Name: \(contact.name)")
-            Text("Number: \(contact.number)")
-        }.padding(2.0)
-    }
+        HStack{
+            Toggle(isOn: $contact.favourite) {
+                Image(systemName: contact.favourite ? "star.fill" : "star")
+                        }
+                        .tint(.green)
+                    }
+            VStack{
+                Text("Name: \(contact.name)")
+                Text("Number: \(contact.number)")
+                
+            }
+        }
+        
+    
 }
 
 struct ContactRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ContactRowView(contact:Contact(name:"Example", number:"Example"))
+        ContactRowView(contact:Contact(name:"Example", number:"Example", favourite: false, dateOfBirth: Date.init()))
     }
 }

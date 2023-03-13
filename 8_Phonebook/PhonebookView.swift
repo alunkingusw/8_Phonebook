@@ -26,7 +26,8 @@ struct PhonebookView: View {
             
             .toolbar{
                 ToolbarItemGroup(placement: .primaryAction){
-                    HStack{Button("+"){
+                    HStack{
+                    Button("+"){
                         showView.toggle()
                     }.sheet(isPresented:$showView){
                         ContactAddView(contactList:data)
@@ -46,6 +47,7 @@ struct PhonebookView: View {
                 }
                     }
                 }
+                
             }
             
             

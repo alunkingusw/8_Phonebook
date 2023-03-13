@@ -12,7 +12,7 @@ struct ContactAddView: View {
     @State private var showingImagePicker = false
     @State var image:Image?
     @State private var inputImage: UIImage?
-    @StateObject var newContact = Contact(name:"", number:"")
+    @StateObject var newContact = Contact(name:"", number:"", favourite: false, dateOfBirth: Date.init())
     
     func loadImage() {
         guard let inputImage = inputImage else { return }
@@ -40,6 +40,8 @@ struct ContactAddView: View {
                     newContact.image = self.image
                     newContact.editName = newContact.name
                     newContact.editNumber = newContact.number
+                    newContact.editFavourite = newContact.favourite
+                    newContact.editDateOfBirth = newContact.dateOfBirth
                     contactList.contacts.append(newContact)
                     dismiss()
                 }) {
@@ -66,6 +68,11 @@ struct ContactAddView: View {
                     }
             TextField("Name: ", text: $newContact.name)
             TextField("Number: ", text: $newContact.number)
+            Toggle(isOn:$newContact.favourite){
+                Text("Favourite")
+            }
+            DatePicker("Birthday", selection: $newContact.dateOfBirth, displayedComponents: [.date])
+            
             Spacer()
         }.padding(2.0)
             .onChange(of: inputImage) { _ in loadImage() }

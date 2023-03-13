@@ -41,11 +41,17 @@ struct ContactDetailView: View {
                     }
             TextField("Name", text: $contact.editName)
             TextField("Number", text: $contact.editNumber)
+            Toggle(isOn:$contact.editFavourite){
+                Text("Favourite")
+            }
+            DatePicker("Birthday", selection: $contact.editDateOfBirth, displayedComponents: [.date])
         }.padding(2.0)
         .navigationBarItems(trailing:Button("Save"){
             contact.name = contact.editName
             contact.number = contact.editNumber
             contact.image = contact.editImage
+            contact.favourite = contact.editFavourite
+            contact.dateOfBirth = contact.editDateOfBirth
             //clear cache and dispose view
             dismiss()
         })
@@ -54,6 +60,7 @@ struct ContactDetailView: View {
             contact.editName = contact.name
             contact.editNumber = contact.number
             contact.editImage = contact.image
+            contact.editFavourite = contact.favourite
         })
         .onChange(of: inputImage) { _ in loadImage() }
         .sheet(isPresented: $showingImagePicker) {
