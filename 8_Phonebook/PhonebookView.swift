@@ -9,12 +9,14 @@ import SwiftUI
 
 struct PhonebookView: View {
     @State var showView = false
+    @State var searchText = ""
     @ObservedObject var data:Contacts
     @Environment(\.scenePhase) private var scenePhase
     let saveAction: ()->Void
     var body: some View {
         NavigationView{
-            List (data.contacts){ contact in
+            List (data.contacts.filter({"\($0.name)".contains(searchText) || searchText.isEmpty
+            })){ contact in
                 NavigationLink{
                     ContactDetailView(contact:contact)
                 } label:{ContactRowView(contact:contact)
@@ -23,14 +25,31 @@ struct PhonebookView: View {
             .navigationTitle("Contacts")
             
             .toolbar{
-                Button("+"){
-                    showView.toggle()
-                }.sheet(isPresented:$showView){
-                    ContactAddView(contactList:data)
+                ToolbarItemGroup(placement: .primaryAction){
+                    HStack{Button("+"){
+                        showView.toggle()
+                    }.sheet(isPresented:$showView){
+                        ContactAddView(contactList:data)
+                    }
+                    Menu{
+                        Picker(selection: $data.sortBy, label:
+                                
+                            Text("Sorting options")){
+                                Text("name up").tag(0)
+                                Text("name down").tag(1)
+                            }
+                            
+                    
+                    }
+                label:{
+                    Label("Sort", systemImage:"arrow.up.arrow.down")
+                }
+                    }
                 }
             }
             
-        }
+            
+        }.searchable(text: $searchText)
     
         .onChange(of: scenePhase) { phase in
             if phase == .inactive { saveAction() }

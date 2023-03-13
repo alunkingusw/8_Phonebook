@@ -7,6 +7,19 @@
 
 import Foundation
 class Contacts:ObservableObject{
+    @Published var sortBy:Int = 0{
+        didSet{
+            if(sortBy == 0){
+                contacts.sort{
+                    $0.name < $1.name
+                }
+            }else{
+                contacts.sort{
+                    $0.name > $1.name
+                }
+            }
+        }
+    }
     @Published var contacts:[Contact] = [
         
     ]

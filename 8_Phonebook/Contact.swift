@@ -36,14 +36,13 @@ class Contact:Identifiable, ObservableObject, Codable{
 
         try container.encode(name, forKey: .name)
         try container.encode(number, forKey: .number)
-        try container.encode(image, forKey: .image)
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let decodedName = try container.decode(String.self, forKey: .name)
         let decodedNumber = try container.decode(String.self, forKey: .number)
-        let decodedImage = try container.decode(String.self, forKey: .image)
+
         name = decodedName
         number = decodedNumber
         editName = decodedName
